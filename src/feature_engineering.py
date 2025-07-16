@@ -98,8 +98,12 @@ def main():
         max_features = params['feature_engineering']['max_features']
         # max_features = 50
 
-        train_data = load_data('./data/interim/train_processed.csv')
-        test_data = load_data('./data/interim/test_processed.csv')
+        train_data = load_data('./data/raw/train.csv')
+        test_data = load_data('./data/raw/test.csv')
+
+        # ✅ Encode labels before TF-IDF
+        train_data['target'] = train_data['target'].map({'ham': 0, 'spam': 1})
+        test_data['target'] = test_data['target'].map({'ham': 0, 'spam': 1})
 
         train_df, test_df = apply_tfidf(train_data, test_data, max_features)
 
@@ -108,6 +112,7 @@ def main():
     except Exception as e:
         logger.error('Failed to complete the feature engineering process: %s', e)
         print(f"Error: {e}")
+
 
 if __name__ == '__main__':
     main()
