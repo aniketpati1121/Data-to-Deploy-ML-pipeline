@@ -1,10 +1,9 @@
 data_ingestion:
-  test_size: 0.2
+  test_size: 0.2    # 20% data for test set
 
 feature_engineering:
-  max_features: 500
+  max_features: 10  # Select top 10 features
 
 model_building:
-  n_estimators: 100
-  random_state: 42
-  model_type: "random_forest:classifier"
+  n_estimators: 100  # Number of trees in RandomForest
+  random_state: 42   # Seed for reproducibility
